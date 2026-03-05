@@ -89,8 +89,8 @@ Batch 5 → 20 records
     public ItemWriter<Product> itemWriter(DataSource dataSource) {
 
         return new JdbcBatchItemWriterBuilder<Product>()
-                .sql("insert into products(product_id,title,description,price,discount)" +
-                        "values(:productId, :title, :description, :price, :discount)"
+                .sql("insert into products(product_id,title,description,price,discount, discounted_price)" +
+                        "values(:productId, :title, :description, :price, :discount, :discountedPrice)"
                 )
                 .dataSource(dataSource)
                 .beanMapped()

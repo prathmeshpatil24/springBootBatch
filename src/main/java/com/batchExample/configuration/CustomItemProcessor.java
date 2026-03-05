@@ -6,23 +6,40 @@ import org.springframework.batch.infrastructure.item.ItemProcessor;
 
 public class CustomItemProcessor implements ItemProcessor<Product, Product> {
 
-    @Override
-    public @Nullable Product process(Product item) throws Exception {
+//    @Override
+//    public @Nullable Product process(Product item) throws Exception {
+//
+//        try {
+////
+//            System.out.println(item.getProductId() + ":" + item.getDescription());
+//
+//
+//             //Discounted Price
+////            int i = Integer.parseInt(item.getPrice()) - (Integer.parseInt(item.getPrice()) * Integer.parseInt(item.getDiscount()) / 100);
+//            double price = Double.parseDouble(item.getPrice());
+//            double discount = Double.parseDouble(item.getDiscount());
+//
+//            double discountPrice = price - (price * discount / 100);
+//
+//            //System.out.println(discountPrice);
+//            item.setDiscountedPrice(String.valueOf(discountPrice));
+//
+//        } catch (
+//                NumberFormatException ex
+//        ) {
+//            ex.printStackTrace();
+//        }
+//
+//        return item;
+//    }
 
-        try {
-//            put the percentage logic
-            System.out.println(item.getProductId() + ":" + item.getDescription());
-//            int discountPer = Integer.parseInt(item.getDiscount().trim());
-//            double originalPrice = Double.parseDouble(item.getPrice().trim());
-//            double discount = (discountPer / 100) * originalPrice;
-//            double finalPrice = originalPrice - discount;
-//            item.setDiscountedPrice(String.valueOf(finalPrice));
-        } catch (
-                NumberFormatException ex
-        ) {
-            ex.printStackTrace();
+    @Override
+    public Product process(Product product) {
+
+        if(Integer.parseInt(product.getPrice()) < 1000){
+            return null;   // skip this record
         }
 
-        return item;
+        return product;
     }
 }
